@@ -1,11 +1,26 @@
 import React, { Component } from 'react';
 import { Route, Link, NavLink } from 'react-router-dom';
+import NotefulContext from './NotefulContext';
 import Note from './Note';
 import './MainPage.css';
 
+
 class MainPage extends Component {
+    static contextType = NotefulContext;
     render() {
-    const notes = this.props.notes.map(note =>
+    const {folderId} = this.props.match.params;
+    const notesForList = this.context.notes.filter(note => note.folderId === folderId);
+    const notes = (folderId == undefined) ?
+    this.context.notes.map(note =>
+        <li 
+            key={note.id}
+            className='note-item'>
+            <Note 
+            id={note.id} 
+            name={note.name}
+            modified={note.modified}/>
+        </li>)
+    :notesForList.map(note =>
         <li 
             key={note.id}
             className='note-item'>
@@ -25,5 +40,7 @@ class MainPage extends Component {
 export default MainPage
 
 MainPage.defaultProps = {
-    notes: [],
+    match: {
+        params: 0
+    }
 }

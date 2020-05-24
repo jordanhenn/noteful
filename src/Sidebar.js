@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { Route, Link, NavLink } from 'react-router-dom';
+import NotefulContext from './NotefulContext';
 import './Sidebar.css';
 
 class Sidebar extends Component {
+    static contextType = NotefulContext;
     render() {
-    const folders = this.props.folders.map((folder) =>
+    const folders = this.context.folders.map((folder) =>
         <li 
             className='folder-link' 
             key={folder.id}>
@@ -23,7 +25,3 @@ class Sidebar extends Component {
 }
 
 export default Sidebar
-
-Sidebar.defaultProps = {
-    folders: []
-}

@@ -16,3 +16,16 @@
 .note-link:hover {
     text-decoration: underline;
 }
+
+.delete {
+    border: 1px solid black;
+    width: 150px;
+    height: 40px;
+    font-size: 16px;
+}
+
+.delete-button {
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+}

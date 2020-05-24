@@ -1,19 +1,24 @@
 import React, { Component } from 'react';
 import { Route, Link, NavLink } from 'react-router-dom';
 import Note from './Note';
+import NotefulContext from './NotefulContext';
 import './NoteMainPage.css';
 
+
 class NoteMainPage extends Component {
+    static contextType = NotefulContext;
     render() {
+        const {noteId} = this.props.match.params;
+        const note = this.context.notes.find(note => note.id === noteId) || {content: ''};
         return(
         <section className='NoteMainPage'>
             <Note  
-                id={this.props.note.id}
-                name={this.props.note.name}
-                modified={this.props.note.modified}
+                id={note.id}
+                name={note.name}
+                modified={note.modified}
             />
             <div className='NoteMainPage__content'>
-                {this.props.note.content.split(/\n \r|\n/).map((line, i) => 
+                {note.content.split(/\n \r|\n/).map((line, i) => 
                 <p key={i}>{line}</p>
                 )}
             </div>
@@ -25,7 +30,7 @@ class NoteMainPage extends Component {
 export default NoteMainPage
 
 NoteMainPage.defaultProps = {
-    note: {
-        content:'',
+    match: {
+        params: {},
     }
 }

@@ -4,20 +4,59 @@ import MainPage from './MainPage';
 import Sidebar from './Sidebar';
 import NoteSideBar from './NoteSidebar';
 import NoteMainPage from './NoteMainPage';
+import NotefulContext from './NotefulContext';
 import dummyStore from './dummy-store';
 import './App.css';
 
+
 class App extends Component {
   state = {
-      notes: [],
-      folders: []
+      folders: [],
+      notes: []
   }
 
   componentDidMount() {
-    setTimeout(() => this.setState(dummyStore), 600);
+    fetch(`http://localhost:9090/folders`, {
+      method: 'GET',
+      headers: {
+        'content-type': 'application/json'
+      }
+    })
+    .then(response => response.json())
+      .then(data => {
+        this.setState({
+          folders: data
+        });
+      });
+    fetch(`http://localhost:9090/notes`, {
+        method: 'GET',
+        headers: {
+          'content-type': 'application/json'
+        }
+      })
+    .then(response => response.json())
+      .then(data => {
+        this.setState({
+          notes: data
+        });
+      });
+  }
+
+  deleteNote = noteId => {
+    const newNotes = this.state.notes.filter(note =>
+      note.id !== noteId)
+    this.setState({
+      notes: newNotes
+    })
   }
 
   render() {
+  const contextValue = {
+    folders: this.state.folders,
+    notes: this.state.notes,
+    deleteNote: this.deleteNote
+  }
+
   return (
     <div className='App'>
       <header>
@@ -27,41 +66,25 @@ class App extends Component {
           </Link>
         </h1>
       </header>
+    <NotefulContext.Provider value={contextValue}>
       <div className='sidebar-and-notes'>
       <nav className='sidebar'>
         <Route 
           exact 
           key='/'
-          path='/' render={(routeProps) => 
-          <Sidebar
-            folders={this.state.folders}
-            notes={this.state.notes}
-            {...routeProps}
-            />}
+          path='/' 
+          component={Sidebar}
           />
         <Route 
           exact 
           key='/folder/:folderId'
-          path='/folder/:folderId' render={(routeProps) => 
-          <Sidebar
-            folders={this.state.folders}
-            notes={this.state.notes}
-            {...routeProps}
-            />}
+          path='/folder/:folderId' 
+          component={Sidebar}
           />
-        <Route path='/note/:noteId' render={(routeProps) => {
-          const {noteId} = routeProps.match.params;
-          const note = this.state.notes.find(note => note.id === noteId) || {};
-          const folder = this.state.folders.find(folder => folder.id === note.folderId);
-          return(
-          <div className='notesidebar'>
-          <NoteSideBar
-            {...routeProps}
-            note={note}
-            folder={folder}
-            />
-          </div>
-          )}}
+        <Route 
+          key='/note/:noteId'
+          path='/note/:noteId' 
+          component={NoteSideBar}
           />
       </nav>
       <main className='main_page'>
@@ -69,42 +92,23 @@ class App extends Component {
           exact 
           key='/'
           path='/' 
-          render={(routeProps) => { 
-          const notesForFolder = this.state.notes;
-          return(
-          <MainPage
-            {...routeProps}
-            notes={notesForFolder}
-            />)}}
+          component={MainPage}
           />
         <Route 
           exact 
           key='/folder/:folderId'
           path='/folder/:folderId' 
-          render={(routeProps) => { 
-          const {folderId} = routeProps.match.params;
-          const notesForFolder = this.state.notes.filter(note => note.folderId === folderId);
-          return(
-          <MainPage
-            {...routeProps}
-            notes={notesForFolder}
-            />)}}
+          component={MainPage}
           />
         <Route 
           exact 
           key='/note/:noteId'
           path='/note/:noteId' 
-          render={(routeProps) => { 
-          const {noteId} = routeProps.match.params;
-          const note = this.state.notes.find(note => note.id === noteId);
-          return(
-          <NoteMainPage
-            {...routeProps}
-            note={note}
-            />)}}
+          component={NoteMainPage}
           />
       </main>
       </div>
+    </NotefulContext.Provider>
     </div>
   );
   }
