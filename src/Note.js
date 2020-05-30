@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Route, Link } from 'react-router-dom';
 import NotefulContext from './NotefulContext';
 import ErrorBoundary from './ErrorBoundary';
+import PropTypes from 'prop-types';
 import './Note.css';
 
 function deleteNote(noteId, callback) {
