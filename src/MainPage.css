@@ -1,3 +1,21 @@
 .folder-list {
     list-style-type: none;
 }
+
+.addnotelink {
+    border: 1px solid black;
+    padding: 20px;
+    width: 150px;
+    text-align: center;
+    text-decoration: none;
+    margin-left: 40px;
+    color: black;
+}
+
+.addnotelink:hover {
+    background-color: lightblue;
+}
+
+.addnotebutton {
+    margin-top: 20px;
+}

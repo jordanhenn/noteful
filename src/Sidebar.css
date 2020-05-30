@@ -1,6 +1,8 @@
 .folder-list {
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .folder-link {
@@ -23,4 +25,22 @@
 
 .sidebarlink.active {
     background-color: lightblue;
+}
+
+.addfolderlink {
+    border: 1px solid black;
+    padding: 20px;
+    width: 150px;
+    text-align: center;
+    text-decoration: none;
+    margin-left: 40px;
+    color: black;
+}
+
+.addfolderlink:hover {
+    background-color: lightblue;
+}
+
+.addfolderbutton {
+    margin-top: 10px;
 }

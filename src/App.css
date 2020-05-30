@@ -4,6 +4,8 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .header-link {
@@ -27,8 +29,4 @@ header {
   display: flex;
   flex-direction: row;
   width: 100%;
-}
-
-.notesidebar {
-  margin-right: 150px;
 }

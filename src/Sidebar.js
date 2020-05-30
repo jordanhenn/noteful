@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Route, Link, NavLink } from 'react-router-dom';
 import NotefulContext from './NotefulContext';
+import ErrorBoundary from './ErrorBoundary';
 import './Sidebar.css';
 
 class Sidebar extends Component {
@@ -17,9 +18,18 @@ class Sidebar extends Component {
             </NavLink>
         </li>)
         return(
-        <ul className='folder-list'>
+        <div className='folder-list'>
+        <ErrorBoundary>
+        <ul>
             {folders}
         </ul>
+        </ErrorBoundary>
+        <div className='addfolderbutton'>
+        <NavLink className='addfolderlink' to={'/add-folder'}>
+        Add Folder
+        </NavLink>
+        </div>
+        </div>
         );
     }
 }

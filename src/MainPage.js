@@ -30,9 +30,16 @@ class MainPage extends Component {
             modified={note.modified}/>
         </li>)
         return(
+        <div>
         <ul className='folder-list'>
             {notes}
         </ul>
+        <div className='addnotebutton'>
+        <NavLink className='addnotelink' to={'/add-note'}>
+        Add Note
+        </NavLink>
+        </div>
+        </div>
         );
     }
 }

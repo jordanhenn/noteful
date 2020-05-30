@@ -1,0 +1,44 @@
+.AddFolder {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+  
+  .AddFolder__form input,
+  .AddFolder__form textarea {
+    text-align: left;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    /* minus side padding and border */
+    width: calc(100% - 16px - 2px);
+    padding: 5px 8px;
+    border: 1px solid #ddd;
+  }
+  
+  .AddFolder__form label {
+    margin-top: 10px;
+  }
+  
+  .AddFolder__buttons {
+    text-align: center;
+  }
+
+  button {
+      border: 1px solid black;
+      padding: 10px;
+      width: 150px;
+  }
+
+  button:hover {
+      background-color: lightblue;
+  }
+  
+  .AddFolder__required {
+    color: #a51414;
+  }
+  
+  .AddFolder__error p {
+    color: #a51414;
+    margin-bottom: 5px;
+  }

@@ -5,6 +5,8 @@ import Sidebar from './Sidebar';
 import NoteSideBar from './NoteSidebar';
 import NoteMainPage from './NoteMainPage';
 import NotefulContext from './NotefulContext';
+import AddFolder from './AddFolder';
+import AddNote from './AddNote';
 import dummyStore from './dummy-store';
 import './App.css';
 
@@ -40,7 +42,7 @@ class App extends Component {
           notes: data
         });
       });
-  }
+  }  
 
   deleteNote = noteId => {
     const newNotes = this.state.notes.filter(note =>
@@ -50,11 +52,26 @@ class App extends Component {
     })
   }
 
+  addNote = note => {
+    this.setState({
+      notes: [ ...this.state.notes, note ],
+    })
+  }
+
+  addFolder = folder => {
+    this.setState({
+      folders: [ ...this.state.folders, folder ],
+    })
+  }
+
   render() {
   const contextValue = {
     folders: this.state.folders,
     notes: this.state.notes,
-    deleteNote: this.deleteNote
+    deleteNote: this.deleteNote,
+    addNote: this.addNote,
+    addFolder: this.addFolder
+
   }
 
   return (
@@ -106,6 +123,18 @@ class App extends Component {
           path='/note/:noteId' 
           component={NoteMainPage}
           />
+      <div className='add-item'>
+        <Route
+            key='/add-folder'
+            path='/add-folder'
+            component={AddFolder}
+          />
+        <Route
+            key='/add-note'
+            path='/add-note'
+            component={AddNote}
+          />
+      </div>
       </main>
       </div>
     </NotefulContext.Provider>

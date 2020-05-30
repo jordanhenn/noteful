@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Route, Link } from 'react-router-dom';
 import NotefulContext from './NotefulContext';
+import ErrorBoundary from './ErrorBoundary';
 import './Note.css';
 
 function deleteNote(noteId, callback) {
@@ -29,6 +30,7 @@ function deleteNote(noteId, callback) {
 class Note extends Component {
     render() {
         return(
+        <ErrorBoundary>
         <NotefulContext.Consumer>
         {(context) => ( 
         <div className='Note'>
@@ -57,8 +59,15 @@ class Note extends Component {
         </div>
         )}
         </NotefulContext.Consumer>
+        </ErrorBoundary>
         );
     }
 }
 
 export default Note
+
+Note.propTypes = {
+    id: PropTypes.string,
+    modified: PropTypes.string,
+    name: PropTypes.string
+};
