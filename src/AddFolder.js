@@ -1,5 +1,6 @@
 import React, { Component } from  'react';
 import NotefulContext from './NotefulContext';
+import uniqid from 'uniqid';
 import './AddFolder.css';
 
 class AddFolder extends Component {
@@ -15,6 +16,7 @@ class AddFolder extends Component {
     const { name } = e.target
     const folder = {
       name: name.value,
+      id: uniqid()
     }
     this.setState({ error: null })
     fetch('http://localhost:9090/folders', {

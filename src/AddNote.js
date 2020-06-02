@@ -2,6 +2,7 @@ import React, { Component } from  'react';
 import NotefulContext from './NotefulContext';
 import './AddNote.css';
 import ValidationError from './ValidationError';
+import uniqid from 'uniqid';
 
 class AddNote extends Component {
   static contextType = NotefulContext;
@@ -32,6 +33,7 @@ class AddNote extends Component {
     const { name } = this.state
     const note = {
       name: name.value,
+      id: uniqid(),
       modified: '5-28-2020',
       folderId: folder.value,
       content: content.value
