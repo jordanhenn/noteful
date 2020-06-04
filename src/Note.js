@@ -29,6 +29,7 @@ function deleteNote(noteId, callback) {
 }
 
 class Note extends Component {
+    static contextType = NotefulContext;
     render() {
         return(
         <ErrorBoundary>
@@ -53,6 +54,7 @@ class Note extends Component {
                             this.props.id,
                             context.deleteNote
                         )
+                        this.props.history.push('/')
                     }}>
                     Delete Note
                 </button>

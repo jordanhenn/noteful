@@ -16,6 +16,7 @@ class NoteMainPage extends Component {
                 id={note.id}
                 name={note.name}
                 modified={note.modified}
+                history={this.props.history}
             />
             <div className='NoteMainPage__content'>
                 {note.content.split(/\n \r|\n/).map((line, i) => 
