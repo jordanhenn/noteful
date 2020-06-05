@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { Route, Link, NavLink } from 'react-router-dom';
 import NotefulContext from './NotefulContext';
 import Note from './Note';
@@ -30,15 +30,15 @@ class MainPage extends Component {
             modified={note.modified}/>
         </li>)
         return(
-        <div>
-        <ul className='folder-list'>
-            {notes}
-        </ul>
+        <div className='reverse'>
         <div className='addnotebutton'>
         <NavLink className='addnotelink' to={'/add-note'}>
         Add Note
         </NavLink>
         </div>
+        <ul className='folder-list'>
+            {notes}
+        </ul>
         </div>
         );
     }

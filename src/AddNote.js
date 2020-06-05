@@ -6,7 +6,7 @@ import uniqid from 'uniqid';
 
 class AddNote extends Component {
   static contextType = NotefulContext;
-
+  
   state = {
     error: null,
     name: {
@@ -92,11 +92,15 @@ handleClickCancel = () => {
               name='name'
               id='name'
               placeholder='Give your new note a name'
+              aria-label='Name for the new note'
+              aria-required='true'
+              aria-describedby='nameRestraint'
+              aria-invalid='true'
               onChange={e => this.updateName(e.target.value)}
               required
             />
              {this.state.name.touched &&
-            <ValidationError message={this.validateName()}/>}  
+            <ValidationError id='nameRestraint' message={this.validateName()}/>}  
           </div>
           <div>
             <label htmlFor='content'>
@@ -107,6 +111,8 @@ handleClickCancel = () => {
               name='content'
               id='content'
               placeholder='Give your new note some content'
+              aria-label='Content for the new note'
+              aria-required='true'
               required
             />
           </div>
@@ -118,6 +124,8 @@ handleClickCancel = () => {
                 id='folder'
                 name="folder"
                 placeholder='Pick a folder'
+                aria-label='Pick a folder to add the note to'
+                aria-required='true'
                 required>
                 {options}
             </select>

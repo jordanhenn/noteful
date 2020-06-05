@@ -69,6 +69,8 @@ handleClickCancel = () => {
               name='name'
               id='name'
               placeholder='Give your new folder a name'
+              aria-label='Name for the new folder'
+              aria-required='true'
               required
             />
           </div>
